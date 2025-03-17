@@ -14,8 +14,11 @@ class HttpMethod(Enum):
 
 
 class HttpClient:
-    def __init__(self):
-        self.client = httpx.Client()
+    def __init__(self, proxy):
+        if proxy != None:
+            self.client = httpx.Client(proxies=proxy)
+        else:
+            self.client = httpx.Client()
         self.client.headers.update({"Content-Type": "application/json"})
 
     def request(

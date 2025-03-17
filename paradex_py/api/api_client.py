@@ -30,10 +30,11 @@ class ParadexApiClient(HttpClient):
         self,
         env: Environment,
         logger: Optional[logging.Logger] = None,
+        proxy: Optional[any] = None
     ):
         self.env = env
         self.logger = logger or logging.getLogger(__name__)
-        super().__init__()
+        super().__init__(proxy=proxy)
         self.api_url = f"https://api.{self.env}.paradex.trade/v1"
 
     async def __aexit__(self):

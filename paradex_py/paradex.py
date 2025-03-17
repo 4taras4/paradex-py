@@ -31,13 +31,14 @@ class Paradex:
         l1_private_key: Optional[str] = None,
         l2_private_key: Optional[str] = None,
         logger: Optional[logging.Logger] = None,
+        proxy: Optional[any] = None
     ):
         if env is None:
             return raise_value_error("Paradex: Invalid environment")
         self.env = env
         self.logger: logging.Logger = logger or logging.getLogger(__name__)
         # Load api client and system config
-        self.api_client = ParadexApiClient(env=env, logger=logger)
+        self.api_client = ParadexApiClient(env=env, logger=logger, proxy=proxy)
         self.ws_client = ParadexWebsocketClient(env=env, logger=logger)
         self.config = self.api_client.fetch_system_config()
         self.account: Optional[ParadexAccount] = None
